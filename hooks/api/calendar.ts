@@ -11,3 +11,14 @@ export async function getListCalendar(payload: ListCalendarPayload) {
   const response = await client.get<CalendarType[]>(`/calendar?${queryString}`);
   return response.data;
 }
+
+export interface AddCalendarPayload {
+  body: string;
+  date: Date;
+  time: TimeType;
+}
+
+export async function addCalendar(payload: AddCalendarPayload) {
+  const response = await client.post<CalendarType>('/', payload);
+  return response.data;
+}

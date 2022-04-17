@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getListCalendar } from './api/calendar';
 
-function useCalendar() {
+function useListCalendar() {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const { data, isLoading, refetch } = useQuery(
@@ -61,4 +61,4 @@ function useCalendar() {
   };
 }
 
-export default useCalendar;
+export default useListCalendar;

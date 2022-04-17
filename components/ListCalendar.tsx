@@ -10,6 +10,7 @@ interface Props {
   year: number;
   prevMonth: () => void;
   nextMonth: () => void;
+  onModalClick: () => void;
 }
 
 const ListCalendar: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const ListCalendar: React.FC<Props> = ({
   year,
   prevMonth,
   nextMonth,
+  onModalClick,
 }) => (
   <Container>
     <Header
@@ -32,7 +34,7 @@ const ListCalendar: React.FC<Props> = ({
 
     <Week calendar={calendar} year={year} month={month} />
 
-    <Button>추가</Button>
+    <Button onClick={onModalClick}>추가</Button>
   </Container>
 );
 
