@@ -36,6 +36,10 @@ const IndexPage: NextPage = () => {
         visible={modal}
         title="일정 추가"
         body={body}
+        time={time}
+        date={date}
+        setDate={setDate}
+        onChange={onChange}
         onCancel={onCancel}
         onAddCalendar={onAddCalendar}
       />

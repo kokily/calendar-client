@@ -1,30 +1,30 @@
-import type { UseMutateFunction } from 'react-query';
+import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { shadow } from '../styles';
-import { AddCalendarPayload } from '../hooks/api/calendar';
-
-interface ButtonProps {
-  cyan?: boolean;
-}
+import AddButtons from './common/AddButtons';
+import InputGroup from './common/InputGroup';
 
 interface Props {
   visible: boolean;
   title: string;
   body: string;
+  time: string;
+  date: Date;
+  setDate: Dispatch<SetStateAction<Date>>;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   onCancel: () => void;
-  onAddCalendar: UseMutateFunction<
-    CalendarType,
-    unknown,
-    AddCalendarPayload,
-    unknown
-  >;
+  onAddCalendar: () => void;
 }
 
 const Modal: React.FC<Props> = ({
   visible,
   title,
   body,
+  time,
+  date,
+  setDate,
+  onChange,
   onCancel,
   onAddCalendar,
 }) => {
@@ -35,10 +35,15 @@ const Modal: React.FC<Props> = ({
       <Content>
         <h2>{title}</h2>
 
-        <div className="buttons">
-          <Button onClick={onCancel}>취소</Button>
-          <Button onClick={() => onAddCalendar}>저장</Button>
-        </div>
+        <InputGroup
+          body={body}
+          time={time}
+          date={date}
+          setDate={setDate}
+          onChange={onChange}
+        />
+
+        <AddButtons onCancel={onCancel} onAddCalendar={onAddCalendar} />
       </Content>
     </Container>
   );
@@ -72,10 +77,7 @@ const Content = styled.div`
   p {
     margin-bottom: 3rem;
   }
-  .buttons {
-    display: flex;
-    justify-content: flex-end;
-  }
+
   @keyframes slideUpFromBottom {
     0% {
       transform: translateY(70%);
@@ -85,33 +87,6 @@ const Content = styled.div`
       transform: translateY(0);
       opacity: 1;
     }
-  }
-`;
-
-const Button = styled.button<ButtonProps>`
-  width: 5rem;
-  height: 2rem;
-  border: none;
-  background: #868e96;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 4px;
-  cursor: pointer;
-  ${(props) =>
-    props.cyan &&
-    css`
-      background: #15aabf;
-      &:hover {
-        color: #15aabf;
-      }
-    `}
-  &:hover {
-    background: #dee2e6;
-    color: #343a40;
-  }
-  & + & {
-    margin-left: 0.75rem;
   }
 `;
 
