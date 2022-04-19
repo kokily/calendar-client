@@ -22,3 +22,13 @@ export async function addCalendar(payload: AddCalendarPayload) {
   const response = await client.post<CalendarType>('/calendar', payload);
   return response.data;
 }
+
+export async function getReadCalendar(id: string) {
+  const response = await client.get<CalendarType>(`/calendar/${id}`);
+  return response.data;
+}
+
+export async function removeCalendar(id: string) {
+  await client.delete(`/calendar/${id}`);
+  return null;
+}

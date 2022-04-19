@@ -1,32 +1,27 @@
-import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import React from 'react';
 import styled from 'styled-components';
-import { shadow } from '../styles';
-import AddButtons from './common/AddButtons';
-import InputGroup from './common/InputGroup';
+import { shadow } from '../../styles';
 
 interface Props {
   visible: boolean;
   title: string;
-  body: string;
-  time: string;
-  date: Date;
-  setDate: Dispatch<SetStateAction<Date>>;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-  onCancel: () => void;
-  onAddCalendar: () => void;
+  body?: string;
+  time?: string;
+  selected?: string;
+  onRemoveClick: () => void;
+  onReadCancel: () => void;
+  onRemove: () => void;
+  onEdit: () => void;
 }
 
-const Modal: React.FC<Props> = ({
+const ReadModal: React.FC<Props> = ({
   visible,
   title,
   body,
   time,
-  date,
-  setDate,
-  onChange,
-  onCancel,
-  onAddCalendar,
+  selected,
+  onEdit,
+  onRemove,
 }) => {
   if (!visible) return null;
 
@@ -34,16 +29,6 @@ const Modal: React.FC<Props> = ({
     <Container>
       <Content>
         <h2>{title}</h2>
-
-        <InputGroup
-          body={body}
-          time={time}
-          date={date}
-          setDate={setDate}
-          onChange={onChange}
-        />
-
-        <AddButtons onCancel={onCancel} onAddCalendar={onAddCalendar} />
       </Content>
     </Container>
   );
@@ -90,4 +75,4 @@ const Content = styled.div`
   }
 `;
 
-export default Modal;
+export default ReadModal;

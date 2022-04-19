@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
-import AddModal from '../components/common/AddModal';
+import AddModal from '../components/add/AddModal';
 import ListCalendar from '../components/ListCalendar';
+import ReadModal from '../components/read/Modal';
 import useAddCalendar from '../hooks/useAddCalendar';
 import useListCalendar from '../hooks/useListCalendar';
+import useReadCalendar from '../hooks/useReadCalendar';
 
 const IndexPage: NextPage = () => {
   const { data, isLoading, monList, month, year, prevMonth, nextMonth } =
@@ -18,6 +20,14 @@ const IndexPage: NextPage = () => {
     onCancel,
     onModalClick,
   } = useAddCalendar();
+  const {
+    data: readCalendar,
+    readModal,
+    onRemoveClick,
+    onReadCancel,
+    onRemoveConfirm,
+    onEdit,
+  } = useReadCalendar();
 
   if (isLoading) return <h3>Loading...</h3>;
 
@@ -42,6 +52,17 @@ const IndexPage: NextPage = () => {
         onChange={onChange}
         onCancel={onCancel}
         onAddCalendar={onAddCalendar}
+      />
+      <ReadModal
+        visible={readModal}
+        title="일정 확인"
+        body={readCalendar?.body}
+        time={readCalendar?.time}
+        selected={readCalendar?.selected}
+        onRemoveClick={onRemoveClick}
+        onReadCancel={onReadCancel}
+        onRemove={onRemoveConfirm}
+        onEdit={onEdit}
       />
     </>
   );
