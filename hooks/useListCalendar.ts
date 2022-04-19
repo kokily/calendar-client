@@ -48,7 +48,7 @@ function useListCalendar() {
 
   useEffect(() => {
     refetch();
-  }, [month, year]);
+  }, [month, year, data?.length]);
 
   return {
     data,

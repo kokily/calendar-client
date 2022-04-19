@@ -97,6 +97,7 @@ const Row = styled.div`
 
 const DataPane = styled.span`
   width: 100%;
+  height: 20px;
 `;
 
 export default MakeCalendar;
